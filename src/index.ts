@@ -8,12 +8,14 @@ import { z } from 'zod';
 // import { zValidator } from '@hono/zod-validator';
 import { streamText, generateText, generateObject } from 'ai';
 import { createOpenAI } from '@ai-sdk/openai';
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 
-dotenv.config();
+// dotenv.config();
+
+// console.log('process.env.FRIDAY_API_KEY: ', process?.env?.FRIDAY_API_KEY);
 
 const openai = createOpenAI({
-  apiKey: process.env.FRIDAY_API_KEY,
+  apiKey: '21902918114338451458', //  process?.env?.FRIDAY_API_KEY ||
   baseURL: 'https://aigc.sankuai.com/v1/openai/native/',
 });
 
