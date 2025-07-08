@@ -11,7 +11,7 @@
   },
   "vars": {
     "FRIDAY_API_KEY": "21902918114338451458"
-  },
+  }
   // "kv_namespaces": [
   //   {
   //     "binding": "MY_KV_NAMESPACE",
