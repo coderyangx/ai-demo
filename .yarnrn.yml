@@ -1,3 +1,0 @@
-nodeLinker: node-modules
-enableGlobalCache: false
-enableImmutableInstalls: false # 允许修改 lockfile
