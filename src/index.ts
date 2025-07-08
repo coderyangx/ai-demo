@@ -19,6 +19,7 @@ const openai = createOpenAI({
   baseURL: 'https://aigc.sankuai.com/v1/openai/native/',
 });
 
+
 const app = new Hono();
 
 // 配置CORS，允许所有来源访问
