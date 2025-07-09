@@ -12,7 +12,7 @@
 	},
   "routes": [
     {
-      "pattern": "aicoder.dpdns.org/",
+      "pattern": "aicoder.dpdns.org",
       "custom_domain": true
     }
   ],
