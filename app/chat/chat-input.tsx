@@ -1,9 +1,8 @@
 import React from 'react';
 import { Loader2, SendHorizontal } from 'lucide-react';
-// import { Input } from '@/components/ui/input';
-// import { Button } from '@/components/ui/button';
-// import { Input } from '@/components/shadcn/Input';
-// import { Button, Textarea } from '@/components/shadcn';
+import { Button } from './button';
+import { Textarea } from './textarea';
+import { Input } from './input';
 
 interface ChatInputProps {
   value: string;
@@ -42,14 +41,14 @@ export function ChatInput({
           disabled={isLoading}
           className='flex-1'
         /> */}
-          <textarea
+          <Textarea
             value={value}
             onChange={(e) => onChange(e.target.value)}
             placeholder='请输入你的问题... (支持 Markdown 格式)'
             disabled={isLoading}
             className='flex-1'
           />
-          <button
+          <Button
             type='submit'
             disabled={isLoading || !value.trim()}
             // size='default'
@@ -57,7 +56,7 @@ export function ChatInput({
           >
             <SendHorizontal className='h-4 w-4' />
             <span>发送</span>
-          </button>
+          </Button>
         </div>
       </form>
       {/* 提示文本 */}

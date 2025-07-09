@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Bot, User, Copy, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/chat/avatar';
-import {Button,  } from '@/chat/button'
+import { Button } from '@/chat/button';
 import { motion } from 'motion/react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
