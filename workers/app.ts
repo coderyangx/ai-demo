@@ -12,7 +12,10 @@ app.get('/api/*', (c) => {
 // 对于所有其他路由，返回 SPA
 app.get('*', (c) => {
   const requestHandler = createRequestHandler(
-    () => import('virtual:react-router/server-build'),
+    () =>
+      import('virtual:react-router/server-build').catch((err) => {
+        console.log('err', err);
+      }),
     'production' // 强制生产模式以提供静态资源
   );
 

@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "empty-lab-88c3",
+	"name": "cf-tmp-server",
 	"compatibility_date": "2025-04-01",
 	"main": "./workers/app.ts",
 	"vars": {
