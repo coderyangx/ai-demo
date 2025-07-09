@@ -1,12 +1,26 @@
 import { Hono } from 'hono';
+import { cors } from 'hono/cors';
 import { createRequestHandler } from 'react-router';
 
 const app = new Hono();
 
+// 启用 CORS（虽然同域名下不需要，但作为备用）
+app.use(
+  '*',
+  cors({
+    origin: '*',
+    allowHeaders: ['Content-Type', 'Authorization'],
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  })
+);
+
 // API 路由
-app.get('/api/*', (c) => {
-  // 这里可以添加你的 API 端点
-  return c.json({ message: 'API endpoint' });
+app.get('/api/health', (c) => {
+  return c.json({
+    status: 'ok',
+    message: '测试成功',
+    timestamp: new Date().toISOString(),
+  });
 });
 
 // 对于所有其他路由，返回 SPA
