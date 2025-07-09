@@ -1,14 +1,60 @@
 {
-  "name": "ai-server",
+  "name": "react-router-hono-fullstack-template",
+  "description": "A modern full-stack template powered by Cloudflare Workers, using Hono for backend APIs, React Router for frontend routing, and shadcn/ui for beautiful, accessible components styled with Tailwind CSS",
+  "private": true,
+  "type": "module",
+  "cloudflare": {
+    "label": "React Router + Hono Fullstack App",
+    "products": [
+      "Workers"
+    ],
+    "categories": [
+      "starter"
+    ],
+    "docs_url": "https://developers.cloudflare.com/workers",
+    "preview_image_url": "https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/cd71c67a-253f-477d-022c-2f90cb4b3d00/public",
+    "icon_urls": [],
+    "publish": true
+  },
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy --minify",
-    "cf-typegen": "wrangler types --env-interface CloudflareBindings"
+    "build": "react-router build",
+    "cf-typegen": "wrangler types",
+    "deploy": "npm run build && wrangler deploy",
+    "dev": "react-router dev",
+    "preview": "npm run build && vite preview",
+    "typecheck": "npm run cf-typegen && react-router typegen && tsc -b"
   },
   "dependencies": {
-    "hono": "^4.8.4"
+    "@radix-ui/react-avatar": "^1.1.10",
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-scroll-area": "^1.2.9",
+    "@radix-ui/react-switch": "^1.2.5",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "gsap": "^3.13.0",
+    "hono": "4.8.2",
+    "isbot": "5.1.26",
+    "lucide-react": "^0.525.0",
+    "motion": "^12.12.2",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-markdown": "^10.1.0",
+    "react-router": "7.6.3",
+    "rehype-raw": "^7.0.0",
+    "remark-gfm": "^4.0.1",
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
-    "wrangler": "^4.4.0"
+    "@cloudflare/vite-plugin": "1.7.5",
+    "@react-router/dev": "7.6.3",
+    "@tailwindcss/vite": "4.1.4",
+    "@types/node": "24.0.4",
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4",
+    "tailwindcss": "4.1.1",
+    "typescript": "5.8.3",
+    "vite": "^6.0.0",
+    "vite-tsconfig-paths": "5.1.4",
+    "wrangler": "^4.24.0"
   }
 }
