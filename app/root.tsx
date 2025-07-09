@@ -39,7 +39,8 @@ export default function App() {
 }
 
 // 简化错误边界，适用于 SPA
-export function ErrorBoundary() {
+export function ErrorBoundary(props: any) {
+  console.log('ErrorBoundary ', props);
   return (
     <main className='pt-16 p-4 container mx-auto'>
       <h1>404</h1>

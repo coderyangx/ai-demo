@@ -281,6 +281,7 @@ export default function ChatContainer() {
           <div className='text-sm text-gray-500'>
             {isLoading && '正在输入中...'}
           </div>
+          <div className='text-sm'>cf-fullstack-tmp</div>
           {/* <h2 className='text-lg font-semibold flex'>AI 助手</h2> */}
           {/* <Button variant='destructive'>测试shadcn</Button>
           <Button variant='outline'>测试shadcn</Button>

@@ -7,9 +7,9 @@
 	"name": "ai-server",
 	"compatibility_date": "2025-04-01",
 	"main": "./workers/app.ts",
-	"vars": {
-		"VALUE_FROM_CLOUDFLARE": "Hello from Hono/CF"
-	},
+	// "vars": {
+	// 	"VALUE_FROM_CLOUDFLARE": "Hello from Hono/CF"
+	// },
   // "routes": [
   //   {
   //     "pattern": "aicoder.dpdns.org",

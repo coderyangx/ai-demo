@@ -27,12 +27,12 @@ app.use(
   })
 );
 
-app.get('/', (c) => c.text('Hello, I am a cloudflare worker hono server'));
+// app.get('/', (c) => c.text('Hello, I am a cloudflare worker from ai-server(branch: cf-fullstack-tmp)'));
 // API 路由
 app.get('/api', (c) => {
   return c.json({
     status: 'ok',
-    message: '测试成功',
+    message: 'ai-server: branch: cf-fullstack-tmp',
     timestamp: new Date().toISOString(),
   });
 });
