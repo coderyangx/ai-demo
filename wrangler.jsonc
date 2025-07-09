@@ -10,12 +10,12 @@
 	"vars": {
 		"VALUE_FROM_CLOUDFLARE": "Hello from Hono/CF"
 	},
-  "routes": [
-    {
-      "pattern": "aicoder.dpdns.org",
-      "custom_domain": true
-    }
-  ],
+  // "routes": [
+  //   {
+  //     "pattern": "aicoder.dpdns.org",
+  //     "custom_domain": true
+  //   }
+  // ],
 	"observability": {
 		"enabled": true
 	},
