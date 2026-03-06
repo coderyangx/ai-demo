@@ -44,7 +44,11 @@ export default defineConfig({
     host: true,
     proxy: {
       '/api': {
+<<<<<<< HEAD:packages/client/vite.config.ts
         target: 'http://localhost:8000',
+=======
+        target: 'https://server.aicoder.dpdns.org',
+>>>>>>> f419e30 (feat: add supabase):vite.config.ts
         changeOrigin: true,
       },
     },
