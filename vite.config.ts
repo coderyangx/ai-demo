@@ -42,7 +42,7 @@ export default defineConfig({
     host: true,
     proxy: {
       '/api': {
-        target: 'https://aicoder.dpdns.org',
+        target: 'https://server.aicoder.dpdns.org',
         changeOrigin: true,
       },
     },

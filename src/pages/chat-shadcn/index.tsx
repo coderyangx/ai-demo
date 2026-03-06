@@ -109,15 +109,15 @@ export default function ChatContainer() {
       }
 
       const data = await response.json();
-      const aiResponse = data.message || data.reply || data.response || '';
+      const aiResponse = data.message || data.content || data.response || '';
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         content: aiResponse,
         role: 'assistant',
         timestamp: new Date().toLocaleTimeString(),
       };
-
       setMessages((prev) => [...prev, assistantMessage]);
+      console.log('data', data, assistantMessage);
     } catch (error) {
       console.error('Error:', error);
       const errorMessage: Message = {
