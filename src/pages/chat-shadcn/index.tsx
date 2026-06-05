@@ -23,7 +23,7 @@ export default function ChatContainer() {
   const [input, setInput] = useState('')
   const { theme, toggleTheme } = useTheme()
   const [isLoading, setIsLoading] = useState(false)
-  const [isStreamMode, setIsStreamMode] = useState(false)
+  const [isStreamMode, setIsStreamMode] = useState(true)
   const [streamContent, setStreamContent] = useState('')
   const scrollAreaRef = useRef<HTMLDivElement>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
@@ -93,7 +93,8 @@ export default function ChatContainer() {
   const handleNormalMode = async (content: string) => {
     try {
       // 调用AI /api/agent/chat
-      const response = await fetch(AppConfig.apiBaseUrl + '/api/agent/test', {
+      // const response = await fetch(AppConfig.apiBaseUrl + '/api/agent/chat', {
+      const response = await fetch('http://localhost:3000' + '/api/agent/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -101,7 +102,15 @@ export default function ChatContainer() {
           'X-Timestamp': new Date().getTime().toString(),
           Cookie: cookie
         },
-        body: JSON.stringify({ message: content })
+        body: JSON.stringify({
+          messages: [
+            ...messages,
+            {
+              role: 'user',
+              content
+            }
+          ]
+        })
       })
 
       if (!response.ok) {
@@ -160,7 +169,15 @@ export default function ChatContainer() {
           'X-Timestamp': new Date().getTime().toString(),
           Cookie: cookie
         },
-        body: JSON.stringify({ message: content })
+        body: JSON.stringify({
+          messages: [
+            ...messages,
+            {
+              role: 'user',
+              content: content
+            }
+          ]
+        })
       })
 
       if (!response.ok) {
