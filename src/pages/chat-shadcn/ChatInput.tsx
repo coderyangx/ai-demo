@@ -17,7 +17,6 @@ export function ChatInput({ value, onChange, onSubmit, isLoading = false, classN
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // 自动聚焦
-    console.log('input: ', document.querySelector('input'))
     if (!value.trim() || isLoading) return
     onSubmit()
     setTimeout(() => {
@@ -71,7 +70,12 @@ export function ChatInput({ value, onChange, onSubmit, isLoading = false, classN
             </span>
           )}
         </div>
-        <Button type='submit' disabled={isLoading || !value.trim()} className='min-w-[80px] gap-2 rounded-xl h-10'>
+        <Button
+          type='submit'
+          onClick={handleSubmit}
+          disabled={isLoading || !value.trim()}
+          className='min-w-[80px] gap-2 rounded-xl h-10'
+        >
           <SendHorizontal className='h-4 w-4' />
           <span>发送</span>
         </Button>

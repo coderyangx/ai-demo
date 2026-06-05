@@ -2,28 +2,28 @@
  * 使用 Vercel AI SDK 的 useChat 以及工具调用 - 简单场景
  * 最佳实践组合：Vercel AI SDK 处理前端交互，LangChain 处理复杂 RAG 和 Agent 逻辑
  */
-import { useChat } from '@ai-sdk/react';
-import { Input, Button } from '@/components/ui';
-import { config } from '@/config';
+import { useChat } from '@ai-sdk/react'
+import { Input, Button } from '@/components/ui'
+import { AppConfig } from '@/config'
 
 const ChatComponent = () => {
   const {
     messages,
     input = '',
     handleInputChange,
-    handleSubmit,
+    handleSubmit
   } = useChat({
-    api: config.apiBaseUrl + '/api/agent/stream',
-    streamProtocol: 'data',
+    api: AppConfig.apiBaseUrl + '/api/agent/stream',
+    streamProtocol: 'data'
     // onResponse: (response) => {
     //   console.log('onResponse: ', response);
     // },
     // body: {
     //   message: 'hello',
     // },
-  });
+  })
 
-  console.log('messages', messages);
+  console.log('messages', messages)
 
   return (
     <div className='flex flex-col gap-2'>
@@ -32,14 +32,10 @@ const ChatComponent = () => {
         {messages.map((message) => (
           <div
             key={message.id}
-            className={`flex flex-col gap-2 ${
-              message.role === 'user' ? 'items-end' : 'items-start'
-            }`}
+            className={`flex flex-col gap-2 ${message.role === 'user' ? 'items-end' : 'items-start'}`}
           >
             <div className='text-sm text-gray-500'>{message.role}</div>
-            <div className='text-base bg-white p-2 rounded-md'>
-              {message.content}
-            </div>
+            <div className='text-base bg-white p-2 rounded-md'>{message.content}</div>
             {/* <div className='text-base bg-white p-2 rounded-md'>
               {message.content.split('\n').map((line, index) => (
                 <span key={index}>
@@ -48,37 +44,26 @@ const ChatComponent = () => {
                 </span>
               ))}
             </div> */}
-            <div className='text-sm text-gray-500'>
-              {message.createdAt?.toLocaleString()}
-            </div>
+            <div className='text-sm text-gray-500'>{message.createdAt?.toLocaleString()}</div>
           </div>
         ))}
       </div>
       <div className='flex gap-2'>
-        <Input
-          placeholder='Type a message...'
-          value={input}
-          onChange={handleInputChange}
-          className='flex-1'
-        />
+        <Input placeholder='Type a message...' value={input} onChange={handleInputChange} className='flex-1' />
         <Button onClick={handleSubmit} className='bg-blue-500 text-white'>
           Send
         </Button>
       </div>
       <div>
-        <input
-          placeholder='Type a message...'
-          value={input}
-          onChange={handleInputChange}
-        />
+        <input placeholder='Type a message...' value={input} onChange={handleInputChange} />
       </div>
       <div className=''>
         <div className='text-2xl font-bold'>AgentComponent 测试</div>
         <AgentComponent />
       </div>
     </div>
-  );
-};
+  )
+}
 
 // function calling
 const tools = [
@@ -90,19 +75,19 @@ const tools = [
       parameters: {
         type: 'object',
         properties: {
-          location: { type: 'string' },
+          location: { type: 'string' }
         },
-        required: ['location'],
-      },
-    },
-  },
-];
+        required: ['location']
+      }
+    }
+  }
+]
 
 const AgentComponent = () => {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: 'http://localhost:8080/api/agent/test',
-    body: { tools },
-  });
+    body: { tools }
+  })
 
   return (
     // UI 代码
@@ -113,18 +98,13 @@ const AgentComponent = () => {
         ))}
       </div>
       <div className='flex gap-2'>
-        <Input
-          placeholder='Type a message...'
-          value={input}
-          onChange={handleInputChange}
-          className='flex-1'
-        />
+        <Input placeholder='Type a message...' value={input} onChange={handleInputChange} className='flex-1' />
         <Button onClick={handleSubmit} className='bg-blue-500 text-white'>
           Send
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ChatComponent;
+export default ChatComponent

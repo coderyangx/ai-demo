@@ -1,8 +1,8 @@
 import React, { lazy } from 'react'
 // 添加路由
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
-
 import ChatContainerShadcn from './pages/chat-shadcn' // shadcn
+import { AppConfig } from './config'
 import './App.css'
 
 const ChatShadcn = () => {
@@ -23,7 +23,7 @@ const Supabase = lazy(() => import('./pages/supabase'))
 const Login = lazy(() => import('./pages/login'))
 
 function App() {
-  console.log('App: process.env', import.meta.env.VITE_API_BASE, import.meta.env.VITE_OPEN_API_KEY)
+  console.log('AppConfig', AppConfig)
 
   return (
     <Router>

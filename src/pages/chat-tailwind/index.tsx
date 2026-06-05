@@ -1,86 +1,80 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { SendHorizontal, Bot, User } from 'lucide-react';
-import { MessageBubble } from './MessageBubble';
-import {
-  Input,
-  Button,
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '@/components/ui';
-import { ScrollArea } from '@/components/ui/ScrollArea';
-import { config } from '@/config';
+import React, { useEffect, useRef, useState } from 'react'
+import { SendHorizontal, Bot, User } from 'lucide-react'
+import { MessageBubble } from './MessageBubble'
+import { Input, Button, Avatar, AvatarFallback, AvatarImage } from '@/components/ui'
+import { ScrollArea } from '@/components/ui/ScrollArea'
+import { AppConfig } from '@/config'
 
 interface Message {
-  id: string;
-  content: string;
-  role: 'user' | 'assistant' | 'system' | 'tool';
-  timestamp: string;
+  id: string
+  content: string
+  role: 'user' | 'assistant' | 'system' | 'tool'
+  timestamp: string
 }
 
 export default function ChatContainer() {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const [messages, setMessages] = useState<Message[]>([])
+  const [input, setInput] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const scrollAreaRef = useRef<HTMLDivElement>(null)
 
   // 自动滚动到底部
   useEffect(() => {
     if (scrollAreaRef.current) {
-      scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
+      scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight
     }
-  }, [messages]);
+  }, [messages])
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading) return;
+    e.preventDefault()
+    if (!input.trim() || isLoading) return
 
     const userMessage: Message = {
       id: Date.now().toString(),
       content: input.trim(),
       role: 'user',
-      timestamp: new Date().toLocaleTimeString(),
-    };
+      timestamp: new Date().toLocaleTimeString()
+    }
 
-    setMessages((prev) => [...prev, userMessage]);
-    setInput('');
-    setIsLoading(true);
+    setMessages((prev) => [...prev, userMessage])
+    setInput('')
+    setIsLoading(true)
 
     try {
-      const response = await fetch(config.apiBaseUrl + '/api/agent/chat', {
+      const response = await fetch(AppConfig.apiBaseUrl + '/api/agent/chat', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ message: userMessage.content }),
-      });
+        body: JSON.stringify({ message: userMessage.content })
+      })
 
       if (!response.ok) {
-        throw new Error('网络请求失败');
+        throw new Error('网络请求失败')
       }
 
-      const data = await response.json();
+      const data = await response.json()
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         content: data.reply,
         role: 'assistant',
-        timestamp: new Date().toLocaleTimeString(),
-      };
+        timestamp: new Date().toLocaleTimeString()
+      }
 
-      setMessages((prev) => [...prev, assistantMessage]);
+      setMessages((prev) => [...prev, assistantMessage])
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error:', error)
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         content: '抱歉，发生了一些错误。请稍后再试。',
         role: 'system',
-        timestamp: new Date().toLocaleTimeString(),
-      };
-      setMessages((prev) => [...prev, errorMessage]);
+        timestamp: new Date().toLocaleTimeString()
+      }
+      setMessages((prev) => [...prev, errorMessage])
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   const getAvatar = (role: Message['role']) => {
     switch (role) {
@@ -92,7 +86,7 @@ export default function ChatContainer() {
               <Bot className='w-6 h-6 text-blue-500' />
             </AvatarFallback>
           </Avatar>
-        );
+        )
       case 'user':
         return (
           <Avatar>
@@ -101,11 +95,11 @@ export default function ChatContainer() {
               <User className='w-6 h-6 text-gray-500' />
             </AvatarFallback>
           </Avatar>
-        );
+        )
       default:
-        return null;
+        return null
     }
-  };
+  }
 
   return (
     <div className='flex flex-col h-[calc(100vh-2rem)] max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden'>
@@ -127,14 +121,7 @@ export default function ChatContainer() {
               avatar={getAvatar(message.role)}
             />
           ))}
-          {isLoading && (
-            <MessageBubble
-              content=''
-              role='assistant'
-              isLoading={true}
-              avatar={getAvatar('assistant')}
-            />
-          )}
+          {isLoading && <MessageBubble content='' role='assistant' isLoading={true} avatar={getAvatar('assistant')} />}
         </div>
       </ScrollArea>
 
@@ -155,5 +142,5 @@ export default function ChatContainer() {
         </div>
       </form>
     </div>
-  );
+  )
 }

@@ -2,9 +2,9 @@
  * 2. useObject - 结构化数据生成
  */
 
-import { config } from '@/config';
-import { experimental_useObject } from '@ai-sdk/react';
-import { z } from 'zod';
+import { AppConfig } from '@/config'
+import { experimental_useObject } from '@ai-sdk/react'
+import { z } from 'zod'
 
 // 定义数据结构
 const recipeSchema = z.object({
@@ -12,23 +12,23 @@ const recipeSchema = z.object({
   ingredients: z.array(z.string()),
   steps: z.array(z.string()),
   cookingTime: z.number(),
-  difficulty: z.enum(['简单', '中等', '困难']),
-});
+  difficulty: z.enum(['简单', '中等', '困难'])
+})
 
 const ObjectComponent = () => {
   const {
     object, // 生成的结构化对象
     submit, // 触发生成
     isLoading,
-    error,
+    error
   } = experimental_useObject({
-    api: config.apiBaseUrl + '/api/agent/test',
-    schema: recipeSchema,
-  });
+    api: AppConfig.apiBaseUrl + '/api/agent/test',
+    schema: recipeSchema
+  })
 
   const generateRecipe = () => {
-    submit('生成一个简单的意大利面食谱');
-  };
+    submit('生成一个简单的意大利面食谱')
+  }
 
   return (
     <div className='space-y-4'>
@@ -72,13 +72,9 @@ const ObjectComponent = () => {
         </div>
       )}
 
-      {error && (
-        <div className='p-4 bg-red-100 text-red-700 rounded'>
-          错误: {error.message}
-        </div>
-      )}
+      {error && <div className='p-4 bg-red-100 text-red-700 rounded'>错误: {error.message}</div>}
     </div>
-  );
-};
+  )
+}
 
-export default ObjectComponent;
+export default ObjectComponent

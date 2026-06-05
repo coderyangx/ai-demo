@@ -1,4 +1,4 @@
-export const config = {
+export const AppConfig = {
   apiBaseUrl: import.meta.env.VITE_API_BASE || 'http://localhost:8000',
   openApiKey: import.meta.env.VITE_OPEN_API_KEY,
   wsUrl: import.meta.env.VITE_WS_URL || 'ws://localhost:8000',
